@@ -1,0 +1,29 @@
+<h1>Listing subsubtopic_values</h1>
+
+<table>
+  <tr>
+    <th>Evaluation</th>
+    <th>Subsubtopic</th>
+    <th>Value</th>
+    <th>Comments</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @subsubtopic_values.each do |subsubtopic_value| %>
+  <tr>
+    <td><%= subsubtopic_value.evaluation_id %></td>
+    <td><%= subsubtopic_value.subsubtopic_id %></td>
+    <td><%= subsubtopic_value.value %></td>
+    <td><%= subsubtopic_value.comments %></td>
+    <td><%= link_to 'Show', subsubtopic_value %></td>
+    <td><%= link_to 'Edit', edit_subsubtopic_value_path(subsubtopic_value) %></td>
+    <td><%= link_to 'Destroy', subsubtopic_value, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Subsubtopic value', new_subsubtopic_value_path %>

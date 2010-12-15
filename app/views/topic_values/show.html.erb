@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Evaluation:</b>
+  <%= @topic_value.evaluation_id %>
+</p>
+
+<p>
+  <b>Topic:</b>
+  <%= @topic_value.topic_id %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @topic_value.value %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @topic_value.comments %>
+</p>
+
+
+<%= link_to 'Edit', edit_topic_value_path(@topic_value) %> |
+<%= link_to 'Back', topic_values_path %>

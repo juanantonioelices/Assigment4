@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  member_id: 1
+  evaluator_id: 1
+  skeleton_id: 1
+
+two:
+  member_id: 1
+  evaluator_id: 1
+  skeleton_id: 1

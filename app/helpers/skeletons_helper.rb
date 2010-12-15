@@ -1,0 +1,2 @@
+module SkeletonsHelper
+end

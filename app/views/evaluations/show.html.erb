@@ -1,0 +1,112 @@
+
+<%= render :partial => @evaluation%>
+<%= render 'member' %>
+
+
+ <table border="1">
+    <div id="topics">
+      <tr bgcolor="#333333">
+        <th>Name</th>
+        <th>Description</th>
+        <th>Evaluation</th>
+        <th>Comments</th>  
+      </tr>
+      
+      <% @skeleton.topics.each do |topic| %>
+      <% div_for topic do %>
+      <tr bgcolor="#666666">
+        <div id="topic" >
+        <td> <%= topic.name%></td>
+        <td> <%= topic.description%></td>
+          <% if topic.range>0 %>
+            <% topicValues=TopicValue.find(:all) %>
+            <% topicValues.each do |topic_value|
+              if topic_value.evaluation_id == @evaluation.id and topic_value.topic_id == topic.id
+                 @topicV=topic_value
+              end              
+            end%>
+            <% form_for @topicV do |f| %>
+            <%= f.hidden_field :topic_id, :value => topic.id %>
+            <td> <% 0.upto(topic.range) do |value| %>
+                 <%= f.radio_button :value, value.to_s %> <%= f.label :value, value %>
+                 <% end %></td>
+            <td> <%= f.text_field :comments %></td>
+            <td><%= f.submit "Update" %></td>
+            <%end%>
+          <% else %>
+            <td></td>
+            <td></td>
+            <td></td>
+          <%end%>
+           
+                      
+        </div>
+      </tr>
+        <% topic.subtopics.each do |subtopic| %>
+          <% div_for subtopic do %>
+          <tr bgcolor="#AAAAAA">
+          <div id="subtopic">
+            <td> <%= h(subtopic.name)%></td>
+            <td> <%= h(subtopic.description)%></td>
+            <% if subtopic.range>0 %>
+                    <% subtopicValues=SubtopicValue.find(:all) %>
+                    <% subtopicValues.each do |subtopic_value|
+                      if subtopic_value.evaluation_id == @evaluation.id and subtopic_value.subtopic_id == subtopic.id
+                        @topicV=subtopic_value
+                      end              
+                    end%>
+                    <% form_for @topicV do |f| %>
+                    <%= f.hidden_field :subtopic_id, :value => subtopic.id %>
+                      <td> <% 0.upto(subtopic.range) do |value| %>
+                          <%= f.radio_button :value, value.to_s %> <%= f.label :value, value %>
+                           <% end %></td>
+                      <td> <%= f.text_field :comments %></td>
+                      <td><%= f.submit "Update" %></td>
+                    <%end%>
+                   <% else %>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                <%end%>
+          </div>
+          </tr>
+             <% subtopic.subsubtopics.each do |subsubtopic| %>
+              <% div_for subsubtopic do %>
+               <tr bgcolor="#DDDDDD">
+                <div id="subsubtopic">
+                  <td> <%= h(subsubtopic.name)%></td>
+                  <td> <%= h(subsubtopic.description)%></td>
+                  <% if subsubtopic.range>0 %>
+                    <% subsubtopicValues=SubsubtopicValue.find(:all) %>
+                    <% subsubtopicValues.each do |subsubtopic_value|
+                      if subsubtopic_value.evaluation_id == @evaluation.id and subsubtopic_value.subsubtopic_id == subsubtopic.id
+                        @topicV=subsubtopic_value
+                      end              
+                    end%>
+                    <% form_for @topicV do |f| %>
+                    <%= f.hidden_field :subsubtopic_id, :value => subsubtopic.id %>
+                      <td> <% 0.upto(subsubtopic.range) do |value| %>
+                          <%= f.radio_button :value, value.to_s %> <%= f.label :value, value %>
+                           <% end %></td>
+                      <td> <%= f.text_field :comments %></td>
+                      <td><%= f.submit "Update" %></td>
+                    <%end%>
+                   <% else %>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                <%end%>
+                </div>
+               </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% end %>
+      
+</div>
+</table>
+  
+<%= link_to 'Edit', edit_evaluation_path(@evaluation) %> |
+<%= link_to 'Back', evaluations_path %>

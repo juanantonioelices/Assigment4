@@ -1,0 +1,29 @@
+<h1>Listing topic_values</h1>
+
+<table>
+  <tr>
+    <th>Evaluation</th>
+    <th>Topic</th>
+    <th>Value</th>
+    <th>Comments</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @topic_values.each do |topic_value| %>
+  <tr>
+    <td><%= topic_value.evaluation_id %></td>
+    <td><%= topic_value.topic_id %></td>
+    <td><%= topic_value.value %></td>
+    <td><%= topic_value.comments %></td>
+    <td><%= link_to 'Show', topic_value %></td>
+    <td><%= link_to 'Edit', edit_topic_value_path(topic_value) %></td>
+    <td><%= link_to 'Destroy', topic_value, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Topic value', new_topic_value_path %>

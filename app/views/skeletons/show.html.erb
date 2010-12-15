@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<%= render :partial => @skeleton%>
+  
+  <table border="1">
+    <div id="topics">
+      <% @skeleton.topics.each do |topic| %>
+      <% div_for topic do %>
+      <tr bgcolor="#666666">
+        <div id="topic" >
+        <th> <a href="<%= @skeleton.id%>/topics/<%= topic.id%>"><%= topic.name%></th>
+        <th> <%= topic.description%></th>
+        <th> <%= topic.range%></th>   
+        </div>
+      </tr>
+        <% topic.subtopics.each do |subtopic| %>
+          <% div_for subtopic do %>
+          <tr bgcolor="#AAAAAA">
+          <div id="subtopic">
+            <td> <%= h(subtopic.name)%></td>
+            <td> <%= h(subtopic.description)%></td>
+            <td> <%= h(subtopic.range)%></td> 
+          </div>
+          </tr>
+             <% subtopic.subsubtopics.each do |subsubtopic| %>
+              <% div_for subsubtopic do %>
+               <tr bgcolor="#DDDDDD">
+                <div id="subsubtopic">
+                  <td> -<%= h(subsubtopic.name)%></td>
+                  <td> <%= h(subsubtopic.description)%></td>
+                  <td> <%= h(subsubtopic.range)%></td> 
+                </div>
+               </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% end %>
+</div>
+</table>
+
+<p>New Topic
+<table>
+      <% form_for [@skeleton, Topic.new], do |f| %>
+        <tr>
+          <td><%= f.label :name, "Name" %></td>
+          <td><%= f.text_field :name %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :description, "Description" %></td>
+            <td><%= f.text_field :description %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :range, "Range(number of levels)" %></td>
+            <td><%= f.text_field :range %></td>
+        </tr>
+        <tr>
+        <td></td><td><%= f.submit "Add Topic" %></td></tr>
+      <% end %>
+</table>
+</p>
+
+<p>
+<%= link_to 'Edit', edit_skeleton_path(@skeleton) %> |
+<%= link_to 'Back', skeletons_path %>
+</p>

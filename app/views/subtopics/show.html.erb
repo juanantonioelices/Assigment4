@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Subtopic: <%= @subtopic.name %></h2>
+<table border="1">
+  <tr  bgcolor="#AAAAAA">  
+    <th><%= @subtopic.name %> </th>
+    <th><%= @subtopic.description %> </th>
+    <th><%= @subtopic.range %> </th>
+   </tr>
+   <% @subtopic.subsubtopics.each do |subsubtopic| %>
+    <% div_for subsubtopic do %>
+    <tr bgcolor="#CCCCCC">
+      <div id="subsubtopic">
+        <td> -<%= h(subsubtopic.name)%></td>
+        <td> <%= h(subsubtopic.description)%></td>
+        <td> <%= h(subsubtopic.range)%></td> 
+      </div>
+    </tr>
+    <% end %>
+  <% end %>
+ </table>
+ 
+<p>New Subsubtopic
+<table>
+      <% form_for [@subtopic, Subsubtopic.new] do |f| %>
+        <tr>
+          <td><%= f.label :name, "Name" %></td>
+          <td><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :description, "Description" %></td>
+          <td><%= f.text_field :description %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :range, "Range (number of levels)" %></td>
+          <td><%= f.text_field :range %></td>
+        </tr>
+        <tr>
+        <td></td><td><%= f.submit "Add Subsubtopic" %></td></tr>
+      <% end %>
+</table>
+</p>
+
+
+
+<%= link_to 'Edit', edit_subtopic_path(@subtopic) %> |
+<%= link_to 'Back', subtopics_path %>

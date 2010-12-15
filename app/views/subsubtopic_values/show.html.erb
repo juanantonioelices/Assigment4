@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Evaluation:</b>
+  <%= @subsubtopic_value.evaluation_id %>
+</p>
+
+<p>
+  <b>Subsubtopic:</b>
+  <%= @subsubtopic_value.subsubtopic_id %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @subsubtopic_value.value %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @subsubtopic_value.comments %>
+</p>
+
+
+<%= link_to 'Edit', edit_subsubtopic_value_path(@subsubtopic_value) %> |
+<%= link_to 'Back', subsubtopic_values_path %>

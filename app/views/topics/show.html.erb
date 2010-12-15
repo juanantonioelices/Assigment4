@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Topic: <%= @topic.name %></h2>
+<table border="1">
+  <tr  bgcolor="#666666">  
+    <th><%= @topic.name %> </th>
+    <th><%= @topic.description %> </th>
+    <th><%= @topic.range %> </th>
+   </tr>
+   <% @topic.subtopics.each do |subtopic| %>
+    <% div_for subtopic do %>
+    <tr bgcolor="#AAAAAA">
+      <div id="subtopic">
+        <td> <a href="<%= @topic.id%>/subtopics/<%= subtopic.id%>"><%= h(subtopic.name)%></td>
+        <td> <%= h(subtopic.description)%></td>
+        <td> <%= h(subtopic.range)%></td> 
+      </div>
+    </tr>
+    <% subtopic.subsubtopics.each do |subsubtopic| %>
+              <% div_for subsubtopic do %>
+               <tr bgcolor="#DDDDDD">
+                <div id="subsubtopic">
+                  <td> -<%= h(subsubtopic.name)%></td>
+                  <td> <%= h(subsubtopic.description)%></td>
+                  <td> <%= h(subsubtopic.range)%></td> 
+                </div>
+               </tr>
+              <% end %>
+            <% end %>
+    <% end %>
+  <% end %>
+ </table>
+
+<p>New Subtopic
+<table>
+      <% form_for [@topic, Subtopic.new] do |f| %>
+        <tr>
+          <td><%= f.label :name, "Name" %></td>
+          <td><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :description, "Description" %></td>
+          <td><%= f.text_field :description %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :range, "Range(number of levels)" %></td>
+          <td><%= f.text_field :range %></td>
+        </tr>
+        <tr>
+        <td></td><td><%= f.submit "Add Subtopic" %></td></tr>
+      <% end %>
+</table>
+</p>
+
+
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>
